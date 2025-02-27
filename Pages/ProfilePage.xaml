@@ -2,8 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EcommerceApp.Pages.ProfilePage"
-              xmlns:converters="clr-namespace:EcommerceApp.Converters"
-          BackgroundColor="#262421">
+             xmlns:converters="clr-namespace:EcommerceApp.Converters"
+             Title="My Profile"
+             BackgroundColor="#FFF9E6">
 
+    
     
 </ContentPage>

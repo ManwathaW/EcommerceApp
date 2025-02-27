@@ -6,8 +6,83 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="EcommerceApp.Pages.MainPage"
              x:DataType="pageModels:MainPageModel"
-             BackgroundColor="#262421"
-             >
+            BackgroundColor="#FFF9E6">
 
-   
+    <Grid RowDefinitions="Auto,*" Padding="20">
+        <!-- Header -->
+        <HorizontalStackLayout Grid.Row="0" Spacing="15" Margin="0,0,0,20">
+            <Button Text="View Cart" 
+                    Command="{Binding NavigateToCartCommand}"
+                    BackgroundColor="#FFD700"
+                    TextColor="Black"
+                    CornerRadius="10"
+                    Padding="15,10"/>
+
+            <Button Text="Profile" 
+                    Command="{Binding NavigateToProfileCommand}"
+                    BackgroundColor="#FFD700"
+                    TextColor="Black"
+                    CornerRadius="10"
+                    Padding="15,10"/>
+        </HorizontalStackLayout>
+
+        <!-- Shopping Items List -->
+        <CollectionView Grid.Row="1" 
+                        ItemsSource="{Binding ShoppingItems}"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="0,0,0,15" 
+                           BackgroundColor="White"
+                           CornerRadius="15"
+                           BorderColor="#FFE5B4"
+                           Padding="15">
+                        <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,Auto">
+                            <!-- Item Image -->
+                            <Frame Grid.RowSpan="3" 
+                                   HeightRequest="100" 
+                                   WidthRequest="100"
+                                   IsClippedToBounds="True"
+                                   Padding="0"
+                                   CornerRadius="10">
+                                <Image Source="{Binding ImageUrl}"
+                                       Aspect="AspectFill"/>
+                            </Frame>
+
+                            <!-- Item Details -->
+                            <Label Grid.Column="1" 
+                                   Text="{Binding Name}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#333333"/>
+
+                            <Label Grid.Column="1" 
+                                   Grid.Row="1"
+                                   Text="{Binding Description}"
+                                   FontSize="14"
+                                   TextColor="#666666"/>
+
+                            <Label Grid.Column="1" 
+                                   Grid.Row="2"
+                                   Text="{Binding Price, StringFormat='${0:N2}'}"
+                                   FontSize="16"
+                                   TextColor="#FF8C00"
+                                   FontAttributes="Bold"/>
+
+                            <!-- Add to Cart Button -->
+                            <Button Grid.Column="2" 
+                                    Grid.RowSpan="3"
+                                    Text="Add to Cart"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddToCartCommand}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="#FFD700"
+                                    TextColor="Black"
+                                    CornerRadius="10"
+                                    Padding="15,10"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>
